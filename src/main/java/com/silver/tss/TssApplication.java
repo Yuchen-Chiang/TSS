@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Yuchen_Chiang
  */
 @SpringBootApplication
-@MapperScan(value = "com.silver.tss.dao")
+@MapperScan("com.silver.tss.dao")
 public class TssApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TssApplication.class);
