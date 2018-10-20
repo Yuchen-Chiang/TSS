@@ -16,34 +16,36 @@ public class TopicController {
 
     /**
      * 学生选中题目
-     * /topic/select/topic?topicId=xx
+     * /topic/select/topic?studentId=xx&topicId=xx
      *
+     * @param studentId 学号
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-不存在该题目; 402-选题人数超上限
+     *     "code" : 200-成功; 400-失败; 401-不存在该题目; 402-学号不存在; 403-选题人数超上限
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/select/topic", method = RequestMethod.GET)
-    public String selectTopic(String topicId) {
+    public String selectTopic(String studentId, String topicId) {
 
         return null;
     }
 
     /**
      * 学生丢弃已选题目
-     * /topic/drop/topic?topicId=xx
+     * /topic/drop/topic?studentId=xx&topicId=xx
      *
+     * @param studentId 学号
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-不存在该题目
+     *     "code" : 200-成功; 400-失败; 401-不存在该题目; 402-学号不存在
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/drop/topic", method = RequestMethod.GET)
-    public String dropTopic(String topicId) {
+    public String dropTopic(String studentId, String topicId) {
 
         return null;
     }
