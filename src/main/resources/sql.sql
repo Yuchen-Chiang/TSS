@@ -1,10 +1,16 @@
 create database tss;
 
+create table user(
+  id int not null auto_increment,
+  student_id varchar(64) not null,
+  student_pwd varchar(64) not null,
+  primary key(id)
+)engine=innodb default charset=utf8;
+
 create table student(
   id int not null auto_increment,
   student_id varchar(64) not null,
   student_name varchar(64) not null,
-  student_pwd varchar(64) not null,
   student_status tinyint(1) not null comment '0-not modified pwd; 1-modified pwd',
   class_id varchar(64) not null,
   topic_id varchar(256) null,

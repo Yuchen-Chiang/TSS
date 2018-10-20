@@ -12,7 +12,6 @@ public class Student {
     private int id;
     private String studentId;
     private String studentName;
-    private String studentPwd;
     private Boolean studentStatus;
     private String classId;
     private String topicId;
