@@ -1,5 +1,7 @@
 package com.silver.tss.web;
 
+import com.alibaba.fastjson.JSONObject;
+import com.silver.tss.common.Response;
 import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +38,10 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(String studentId, String studentPwd) {
-
-        return null;
+    public JSONObject login(String studentId, String studentPwd) {
+        LOGGER.info("studentId={} with studentPwd={} login tss", studentId, studentPwd);
+        JSONObject response = userService.isUserExist(studentId, studentPwd);
+        return userService.isUserChangePwd(studentId) ? response : Response.response(300);
     }
 
     /**
@@ -54,9 +57,9 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping(value = "/update/pwd", method = RequestMethod.GET)
-    public String updatePwd(String studentId, String studentPwd) {
-
-        return null;
+    public JSONObject updatePwd(String studentId, String studentPwd) {
+        LOGGER.info("studentId={} change tss pwd={}", studentId, studentPwd);
+        return userService.updateUserInfo(studentId, studentPwd);
     }
 
     /**
@@ -67,7 +70,7 @@ public class StudentController {
      * @param limit 单次上限
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-空
+     *     "code" : 200-成功; 400-失败
      *     "size" : 1
      *     "list" : [
      *          {
@@ -86,9 +89,9 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/list", method = RequestMethod.GET)
-    public String getStudentsList(int offset, int limit) {
-
-        return null;
+    public JSONObject getStudentsList(int offset, int limit) {
+        LOGGER.info("query student info list with offset={}, limit={}", offset, limit);
+        return userService.queryStudentUserList(offset, limit);
     }
 
 }

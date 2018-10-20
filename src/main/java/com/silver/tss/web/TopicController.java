@@ -1,5 +1,7 @@
 package com.silver.tss.web;
 
+import com.alibaba.fastjson.JSONObject;
+import com.silver.tss.common.Response;
 import com.silver.tss.service.TopicService;
 import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
@@ -35,14 +37,23 @@ public class TopicController {
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-不存在该题目; 402-学号不存在; 403-选题人数超上限
+     *     "code" : 200-成功; 400-失败; 401-学生已选过该题; 402-选题人数超上限
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/select/topic", method = RequestMethod.GET)
-    public String selectTopic(String studentId, String topicId) {
+    public JSONObject selectTopic(String studentId, String topicId) {
 
-        return null;
+        if (userService.isStudentUserHasTopic(studentId)) {
+            LOGGER.info("studentId={} select topicId={} failed, cause code = 401", studentId, topicId);
+            return Response.response(401);
+        } else if (topicService.isRealGtMaxSelect(topicId)) {
+            LOGGER.info("studentId={} select topicId={} failed, cause code = 402", studentId, topicId);
+            return Response.response(402);
+        } else {
+            LOGGER.info("studentId={} select topicId={} success", studentId, topicId);
+            return topicService.doSelectTopic(studentId, topicId);
+        }
     }
 
     /**
@@ -53,14 +64,20 @@ public class TopicController {
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-不存在该题目; 402-学号不存在
+     *     "code" : 200-成功; 400-失败; 401-该学生未选择本题目
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/drop/topic", method = RequestMethod.GET)
-    public String dropTopic(String studentId, String topicId) {
+    public JSONObject dropTopic(String studentId, String topicId) {
 
-        return null;
+        if (userService.isStudentUserHasTopic(studentId)) {
+            LOGGER.info("studentId={} drop topicId={} failed, cause code = 401", studentId, topicId);
+            return Response.response(401);
+        } else {
+            LOGGER.info("studentId={} drop topicId={} success", studentId, topicId);
+            return topicService.undoSelectTopic(studentId, topicId);
+        }
     }
 
     /**
@@ -70,14 +87,14 @@ public class TopicController {
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-不存在该题目
+     *     "code" : 200-成功; 400-失败
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/delete/topic", method = RequestMethod.GET)
-    public String deleteTopic(String topicId) {
-
-        return null;
+    public JSONObject deleteTopic(String topicId) {
+        LOGGER.info("topicId={} is deleted", topicId);
+        return topicService.deleteTopic(topicId);
     }
 
     /**
@@ -94,9 +111,8 @@ public class TopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/update/topic", method = RequestMethod.GET)
-    public String updateTopic(String topicId, String data, String type) {
-
-        return null;
+    public JSONObject updateTopic(String topicId, String data, String type) {
+        return topicService.updateTopic(topicId, data, type);
     }
 
 
@@ -109,7 +125,7 @@ public class TopicController {
      * @param limit 单次上限
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-空
+     *     "code" : 200-成功; 400-失败
      *     "size" : 1
      *     "list" : [
      *          {
@@ -129,8 +145,8 @@ public class TopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/list", method = RequestMethod.GET)
-    public String getTopicsList(int offset, int limit) {
-
-        return null;
+    public JSONObject getTopicsList(int offset, int limit) {
+        LOGGER.info("query topic info list with offset={}, limit={}", offset, limit);
+        return topicService.queryTopicList(offset, limit);
     }
 }

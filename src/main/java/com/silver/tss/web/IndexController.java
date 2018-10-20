@@ -1,6 +1,7 @@
 package com.silver.tss.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.silver.tss.common.Response;
 import com.silver.tss.service.StatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/change/status", method = RequestMethod.GET)
     public JSONObject changeStatus(int status) {
-
-        return null;
+        LOGGER.info("change status={}", status);
+        return status == 0 || status == 1 || status == 2 ? statusService.updateStatus(status) : Response.response(400);
     }
 }

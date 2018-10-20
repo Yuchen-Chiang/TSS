@@ -1,5 +1,6 @@
 package com.silver.tss.web;
 
+import com.alibaba.fastjson.JSONObject;
 import com.silver.tss.service.TopicService;
 import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
@@ -40,9 +41,9 @@ public class StatisticsController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/type", method = RequestMethod.GET)
-    public String getTypeInfo(String topicType) {
-
-        return null;
+    public JSONObject getTypeInfo(String topicType) {
+        LOGGER.info("count select num by topic type={}", topicType);
+        return topicService.countSelectedByType(topicType);
     }
 
     /**
@@ -58,9 +59,9 @@ public class StatisticsController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/topic", method = RequestMethod.GET)
-    public String getTopicInfo(String topicId) {
-
-        return null;
+    public JSONObject getTopicInfo(String topicId) {
+        LOGGER.info("count select num by topic id={}", topicId);
+        return topicService.countSelectedByTopic(topicId);
     }
 
     /**
@@ -76,9 +77,9 @@ public class StatisticsController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/class", method = RequestMethod.GET)
-    public String getClassInfo(String classId) {
-
-        return null;
+    public JSONObject getClassInfo(String classId) {
+        LOGGER.info("count select num by class={}", classId);
+        return userService.countSelectedByClass(classId);
     }
 
     /**
@@ -93,8 +94,8 @@ public class StatisticsController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/final", method = RequestMethod.GET)
-    public String getFinalInfo() {
-
-        return null;
+    public JSONObject getFinalInfo() {
+        LOGGER.info("count all select num");
+        return userService.countSelected();
     }
 }
