@@ -2,16 +2,14 @@ package com.silver.tss.domain;
 
 import java.util.Date;
 
-public class Student {
+public class User {
     private Integer id;
 
     private String studentId;
 
-    private String studentName;
+    private String studentPwd;
 
-    private String classId;
-
-    private String topicId;
+    private Boolean studentStatus;
 
     private Boolean yn;
 
@@ -35,28 +33,20 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getStudentPwd() {
+        return studentPwd;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudentPwd(String studentPwd) {
+        this.studentPwd = studentPwd;
     }
 
-    public String getClassId() {
-        return classId;
+    public Boolean getStudentStatus() {
+        return studentStatus;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
-
-    public String getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(String topicId) {
-        this.topicId = topicId;
+    public void setStudentStatus(Boolean studentStatus) {
+        this.studentStatus = studentStatus;
     }
 
     public Boolean getYn() {
