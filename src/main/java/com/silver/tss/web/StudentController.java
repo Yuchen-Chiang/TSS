@@ -1,7 +1,9 @@
 package com.silver.tss.web;
 
+import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 学生账户登录

@@ -1,5 +1,10 @@
 package com.silver.tss.web;
 
+import com.silver.tss.service.TopicService;
+import com.silver.tss.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/statistics")
 public class StatisticsController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StatisticsController.class);
+
+    @Autowired
+    private TopicService topicService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 按题目类型统计选择人数

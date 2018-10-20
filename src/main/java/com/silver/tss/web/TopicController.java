@@ -1,5 +1,10 @@
 package com.silver.tss.web;
 
+import com.silver.tss.service.TopicService;
+import com.silver.tss.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/topic")
 public class TopicController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TopicController.class);
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TopicService topicService;
 
     /**
      * 学生选中题目
@@ -81,7 +94,7 @@ public class TopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/update/topic", method = RequestMethod.GET)
-    public String deleteTopic(String topicId, String data, String type) {
+    public String updateTopic(String topicId, String data, String type) {
 
         return null;
     }
