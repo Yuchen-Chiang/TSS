@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 导航管理器
+ * 状态管理器
  *
  * @author Yuchen Chiang
  */
 @RestController
-@RequestMapping(value = "/index")
-public class IndexController {
+@RequestMapping(value = "/status")
+public class StatusController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StatusController.class);
 
     @Autowired
     private StatusService statusService;
 
     /**
      * 改变系统状态
-     * /index/change/status?status=xx
+     * /status/change/status?status=xx
      *
      * @param status 0-change pwd; 1-start select; 2-end select
      * @return
