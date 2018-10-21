@@ -6,11 +6,10 @@ import com.silver.tss.dao.StudentMapper;
 import com.silver.tss.dao.TeacherMapper;
 import com.silver.tss.dao.TopicMapper;
 import com.silver.tss.dao.UserMapper;
-import com.silver.tss.domain.Student;
-import com.silver.tss.domain.Teacher;
-import com.silver.tss.domain.Topic;
-import com.silver.tss.domain.User;
+import com.silver.tss.domain.*;
 import com.silver.tss.service.ExcelService;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,12 +17,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @Service("excelService")
 public class ExcelServiceImpl implements ExcelService {
@@ -64,6 +63,7 @@ public class ExcelServiceImpl implements ExcelService {
                 student.setStudentName(studentName);
                 student.setClassId(classId);
                 student.setTopicId("null");
+                student.setTopicName("null");
                 student.setYn(true);
                 student.setCreateTime(new Date());
                 student.setModifyTime(new Date());
@@ -172,8 +172,31 @@ public class ExcelServiceImpl implements ExcelService {
     }
 
     @Override
-    public ResponseEntity exportStudentsExcel(String classId) {
-        return null;
+    public Workbook exportStudentsExcel(String classId) {
+
+        StudentExample se = new StudentExample();
+        if (Integer.parseInt(classId) == -1) se.createCriteria().andYnEqualTo(true);
+        else se.createCriteria().andClassIdEqualTo(classId).andYnEqualTo(true);
+        List<Student> students = studentMapper.selectByExample(se);
+
+        Workbook wb = new HSSFWorkbook();
+        HSSFSheet sheet = ((HSSFWorkbook) wb).createSheet();
+        HSSFRow row0 = sheet.createRow(0);
+        row0.createCell(0).setCellValue("学号");
+        row0.createCell(1).setCellValue("姓名");
+        row0.createCell(2).setCellValue("班号");
+        row0.createCell(3).setCellValue("题目");
+
+        int r = 1;
+        for (Student student : students) {
+            HSSFRow row = sheet.createRow(r++);
+            row.createCell(0).setCellValue(student.getStudentId());
+            row.createCell(1).setCellValue(student.getStudentName());
+            row.createCell(2).setCellValue(student.getClassId());
+            row.createCell(3).setCellValue(student.getTopicName());
+        }
+
+        return wb;
     }
 
     private Workbook getReadWorkBook(String fileName, MultipartFile file) {

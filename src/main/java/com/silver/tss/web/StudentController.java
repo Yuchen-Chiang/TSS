@@ -78,6 +78,7 @@ public class StudentController {
      *              "studentName" : "xxx",
      *              "classId" : "xxx",
      *              "topicId" : "xxx",
+     *              "topicName" : "xxx",
      *              "yn" : "true",
      *              "createTime" : "xxx",
      *              "modifiedTime" : "xxx"

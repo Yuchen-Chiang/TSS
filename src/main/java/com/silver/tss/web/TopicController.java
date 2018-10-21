@@ -118,7 +118,7 @@ public class TopicController {
 
 
     /**
-     * 服务端分页获取题目列表
+     * 获取题目列表
      * /topic/get/list
      *
      * @return

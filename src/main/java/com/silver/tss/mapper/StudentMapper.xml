@@ -7,6 +7,7 @@
     <result column="student_name" jdbcType="VARCHAR" property="studentName" />
     <result column="class_id" jdbcType="VARCHAR" property="classId" />
     <result column="topic_id" jdbcType="VARCHAR" property="topicId" />
+    <result column="topic_name" jdbcType="VARCHAR" property="topicName" />
     <result column="yn" jdbcType="BIT" property="yn" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
@@ -70,14 +71,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, student_id, student_name, class_id, topic_id, yn, create_time, modify_time
+    id, student_id, student_name, class_id, topic_id, topic_name, yn, create_time, modify_time
   </sql>
   <select id="selectByExample" parameterType="com.silver.tss.domain.StudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from student
     <if test="_parameter != null">
@@ -94,12 +94,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.silver.tss.domain.Student">
-    insert into student (id, student_id, student_name, 
-      class_id, topic_id, yn, create_time, 
-      modify_time)
-    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR}, 
-      #{classId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, #{yn,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP})
+    insert into student (id, student_id, student_name,
+      class_id, topic_id, topic_name,
+      yn, create_time, modify_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{studentName,jdbcType=VARCHAR},
+      #{classId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, #{topicName,jdbcType=VARCHAR},
+      #{yn,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.silver.tss.domain.Student">
     insert into student
@@ -118,6 +120,9 @@
       </if>
       <if test="topicId != null">
         topic_id,
+      </if>
+      <if test="topicName != null">
+        topic_name,
       </if>
       <if test="yn != null">
         yn,
@@ -144,6 +149,9 @@
       </if>
       <if test="topicId != null">
         #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="topicName != null">
+        #{topicName,jdbcType=VARCHAR},
       </if>
       <if test="yn != null">
         #{yn,jdbcType=BIT},
@@ -180,6 +188,9 @@
       <if test="record.topicId != null">
         topic_id = #{record.topicId,jdbcType=VARCHAR},
       </if>
+      <if test="record.topicName != null">
+        topic_name = #{record.topicName,jdbcType=VARCHAR},
+      </if>
       <if test="record.yn != null">
         yn = #{record.yn,jdbcType=BIT},
       </if>
@@ -197,13 +208,14 @@
   <update id="updateByExample" parameterType="map">
     update student
     set id = #{record.id,jdbcType=INTEGER},
-      student_id = #{record.studentId,jdbcType=VARCHAR},
-      student_name = #{record.studentName,jdbcType=VARCHAR},
-      class_id = #{record.classId,jdbcType=VARCHAR},
-      topic_id = #{record.topicId,jdbcType=VARCHAR},
-      yn = #{record.yn,jdbcType=BIT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    student_id = #{record.studentId,jdbcType=VARCHAR},
+    student_name = #{record.studentName,jdbcType=VARCHAR},
+    class_id = #{record.classId,jdbcType=VARCHAR},
+    topic_id = #{record.topicId,jdbcType=VARCHAR},
+    topic_name = #{record.topicName,jdbcType=VARCHAR},
+    yn = #{record.yn,jdbcType=BIT},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

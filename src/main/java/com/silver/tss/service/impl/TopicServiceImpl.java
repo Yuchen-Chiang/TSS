@@ -59,6 +59,7 @@ public class TopicServiceImpl implements TopicService {
 
         Student s = new Student();
         s.setTopicId(topicId);
+        s.setTopicName(topic.getTopicName());
         StudentExample se = new StudentExample();
         se.createCriteria()
                 .andStudentIdEqualTo(studentId)
@@ -85,6 +86,7 @@ public class TopicServiceImpl implements TopicService {
 
         Student s = new Student();
         s.setTopicId("null");
+        s.setTopicName("null");
         StudentExample se = new StudentExample();
         se.createCriteria()
                 .andStudentIdEqualTo(studentId)
@@ -112,6 +114,7 @@ public class TopicServiceImpl implements TopicService {
         Student s = new Student();
         //todo 可能有点问题，需测试传入null
         s.setTopicId("null");
+        s.setTopicName("null");
         return studentMapper.updateByExampleSelective(s, se) > 0 && topicMapper.updateByExampleSelective(t, te) > 0 ? Response.response(200) : Response.response(400);
     }
 

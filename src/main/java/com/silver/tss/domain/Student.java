@@ -13,6 +13,8 @@ public class Student {
 
     private String topicId;
 
+    private String topicName;
+
     private Boolean yn;
 
     private Date createTime;
@@ -57,6 +59,14 @@ public class Student {
 
     public void setTopicId(String topicId) {
         this.topicId = topicId;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
     }
 
     public Boolean getYn() {

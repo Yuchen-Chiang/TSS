@@ -445,6 +445,76 @@ public class StudentExample {
             return (Criteria) this;
         }
 
+        public Criteria andTopicNameIsNull() {
+            addCriterion("topic_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameIsNotNull() {
+            addCriterion("topic_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameEqualTo(String value) {
+            addCriterion("topic_name =", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameNotEqualTo(String value) {
+            addCriterion("topic_name <>", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameGreaterThan(String value) {
+            addCriterion("topic_name >", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameGreaterThanOrEqualTo(String value) {
+            addCriterion("topic_name >=", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameLessThan(String value) {
+            addCriterion("topic_name <", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameLessThanOrEqualTo(String value) {
+            addCriterion("topic_name <=", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameLike(String value) {
+            addCriterion("topic_name like", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameNotLike(String value) {
+            addCriterion("topic_name not like", value, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameIn(List<String> values) {
+            addCriterion("topic_name in", values, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameNotIn(List<String> values) {
+            addCriterion("topic_name not in", values, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameBetween(String value1, String value2) {
+            addCriterion("topic_name between", value1, value2, "topicName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicNameNotBetween(String value1, String value2) {
+            addCriterion("topic_name not between", value1, value2, "topicName");
+            return (Criteria) this;
+        }
+
         public Criteria andYnIsNull() {
             addCriterion("yn is null");
             return (Criteria) this;

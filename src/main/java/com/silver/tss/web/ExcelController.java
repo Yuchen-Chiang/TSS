@@ -3,16 +3,19 @@ package com.silver.tss.web;
 import com.alibaba.fastjson.JSONObject;
 import com.silver.tss.common.Response;
 import com.silver.tss.service.ExcelService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * EXCEL导入导出接口
@@ -88,7 +91,18 @@ public class ExcelController {
      */
     @ResponseBody
     @RequestMapping(value = "/export/students", method = RequestMethod.GET)
-    public ResponseEntity<String> exportStudents(String classId) {
-        return new ResponseEntity<>("暂不提供该服务", HttpStatus.OK);
+    public void exportStudents(String classId, HttpServletResponse response) {
+        LOGGER.info("export student class file with classId={}", classId);
+        Workbook wb =  excelService.exportStudentsExcel(classId);
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setHeader("Content-disposition", "attachment;filename=export_"+ classId +".xls");
+        try {
+            OutputStream os = response.getOutputStream();
+            wb.write(os);
+            os.flush();
+            os.close();
+        } catch (IOException ioe) {
+            LOGGER.error(""+ioe);
+        }
     }
 }
