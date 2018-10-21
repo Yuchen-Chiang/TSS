@@ -27,7 +27,7 @@ public class StudentController {
 
     /**
      * 学生账户登录
-     * /student/login?student=xx&studentPwd=xx
+     * /student/login?studentId=xx&studentPwd=xx
      *
      * @param studentId 学号
      * @param studentPwd 密码
@@ -41,7 +41,9 @@ public class StudentController {
     public JSONObject login(String studentId, String studentPwd) {
         LOGGER.info("studentId={} with studentPwd={} login tss", studentId, studentPwd);
         JSONObject response = userService.isUserExist(studentId, studentPwd);
-        return userService.isUserChangePwd(studentId) ? response : Response.response(300);
+        return "200".equals(response.getString("code")) ?
+                userService.isUserChangePwd(studentId) ? response : Response.response(300)
+                : Response.response(400);
     }
 
     /**
