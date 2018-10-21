@@ -47,7 +47,7 @@ public class TopicController {
         if (userService.isStudentUserHasTopic(studentId)) {
             LOGGER.info("studentId={} select topicId={} failed, cause code = 401", studentId, topicId);
             return Response.response(401);
-        } else if (topicService.isRealGtMaxSelect(topicId)) {
+        } else if (topicService.isRealGEtMaxSelect(topicId)) {
             LOGGER.info("studentId={} select topicId={} failed, cause code = 402", studentId, topicId);
             return Response.response(402);
         } else {
@@ -106,23 +106,21 @@ public class TopicController {
      * @param type 更新类型, 0-题目名称; 1-题目描述; 2-题目人数上限
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-不存在该题目; 402-参数错误; 403-题目人数上限小于实际选题人数
+     *     "code" : 200-成功; 400-失败; 401-参数错误; 402-题目人数上限小于实际选题人数
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/update/topic", method = RequestMethod.GET)
     public JSONObject updateTopic(String topicId, String data, String type) {
-        return topicService.updateTopic(topicId, data, type);
+        return topicService.updateTopic(topicId, data, Integer.parseInt(type));
     }
 
 
 
     /**
      * 服务端分页获取题目列表
-     * /topic/get/list?offset=xx&limit=xx
+     * /topic/get/list
      *
-     * @param offset 偏移量
-     * @param limit 单次上限
      * @return
      * {
      *     "code" : 200-成功; 400-失败
@@ -136,7 +134,7 @@ public class TopicController {
      *              "topicDescription" : "xxx",
      *              "topicMaxSelected" : "xxx",
      *              "topicRealSelected" : "xxx",
-     *              "yn" : "1",
+     *              "yn" : "true",
      *              "createTime" : "xxx",
      *              "modifiedTime" : "xxx"
      *          }
@@ -145,8 +143,8 @@ public class TopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/list", method = RequestMethod.GET)
-    public JSONObject getTopicsList(int offset, int limit) {
-        LOGGER.info("query topic info list with offset={}, limit={}", offset, limit);
-        return topicService.queryTopicList(offset, limit);
+    public JSONObject getTopicsList() {
+        LOGGER.info("query topic info list");
+        return topicService.queryTopicList();
     }
 }

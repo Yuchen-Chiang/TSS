@@ -9,4 +9,11 @@ public class Response {
         response.put("code", code);
         return response;
     }
+
+    public static JSONObject response(int code, long count) {
+        JSONObject response = new JSONObject();
+        response.put("code", code);
+        response.put("count", count);
+        return response;
+    }
 }

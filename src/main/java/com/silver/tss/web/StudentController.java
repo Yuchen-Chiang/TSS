@@ -63,11 +63,10 @@ public class StudentController {
     }
 
     /**
-     * 服务端分页获取学生账户列表
-     * /student/get/list?offset=xx&limit=xx
+     * 按班级获取学生账户列表
+     * /student/get/list?classId=xx
      *
-     * @param offset 偏移量
-     * @param limit 单次上限
+     * @param classId 班级号 1-1班; 2-2班; 3-3班; -1-全部班级
      * @return
      * {
      *     "code" : 200-成功; 400-失败
@@ -77,10 +76,9 @@ public class StudentController {
      *              "id" : "xxx",
      *              "studentId" : "xxx",
      *              "studentName" : "xxx",
-     *              "studentStatus" : "xxx",
      *              "classId" : "xxx",
      *              "topicId" : "xxx",
-     *              "yn" : "1",
+     *              "yn" : "true",
      *              "createTime" : "xxx",
      *              "modifiedTime" : "xxx"
      *          }
@@ -89,9 +87,9 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/list", method = RequestMethod.GET)
-    public JSONObject getStudentsList(int offset, int limit) {
-        LOGGER.info("query student info list with offset={}, limit={}", offset, limit);
-        return userService.queryStudentUserList(offset, limit);
+    public JSONObject getStudentsList(String classId) {
+        LOGGER.info("query student info list with classId={}", classId);
+        return userService.queryStudentUserList(classId);
     }
 
 }

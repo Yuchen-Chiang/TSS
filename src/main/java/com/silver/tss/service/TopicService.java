@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface TopicService {
 
-    public Boolean isRealGtMaxSelect(String topicId);
+    public Boolean isRealGEtMaxSelect(String topicId);
 
     public JSONObject doSelectTopic(String studentId, String topicId);
 
@@ -12,9 +12,9 @@ public interface TopicService {
 
     public JSONObject deleteTopic(String topicId);
 
-    public JSONObject updateTopic(String topicId, String data, String type);
+    public JSONObject updateTopic(String topicId, String data, int type);
 
-    public JSONObject queryTopicList(int offset, int limit);
+    public JSONObject queryTopicList();
 
     public JSONObject countSelectedByType(String topicType);
 

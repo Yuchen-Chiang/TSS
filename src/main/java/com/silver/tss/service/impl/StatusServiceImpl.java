@@ -9,6 +9,7 @@ import com.silver.tss.service.StatusService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service("statusService")
@@ -39,6 +40,7 @@ public class StatusServiceImpl implements StatusService {
     public JSONObject updateStatus(int status) {
         Status s = new Status();
         s.setTssStatus(status);
+        s.setModifyTime(new Date());
         StatusExample se = new StatusExample();
         se.createCriteria().andIdEqualTo(1);
         return statusMapper.updateByExampleSelective(s, se) > 0 ? Response.response(200) : Response.response(400);

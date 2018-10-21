@@ -10,7 +10,7 @@ public interface UserService {
 
     public JSONObject isUserExist(String studentId, String studentPwd);
 
-    public JSONObject queryStudentUserList(int offset, int limit);
+    public JSONObject queryStudentUserList(String classId);
 
     public JSONObject updateUserInfo(String studentId, String studentPwd);
 
