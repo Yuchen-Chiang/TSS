@@ -44,7 +44,7 @@ public class ExcelServiceImpl implements ExcelService {
     @Override
     public JSONObject importStudentsExcel(String fileName, MultipartFile file) {
 
-        String classId = file.getName();
+        String classId = fileName.substring(0, fileName.lastIndexOf("."));
         Workbook wb = getReadWorkBook(fileName, file);
         if (wb == null) return Response.response(400);
 
@@ -52,7 +52,7 @@ public class ExcelServiceImpl implements ExcelService {
         int userConut = 0;
         Sheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
-            for (int r = 1; r < sheet.getLastRowNum(); r++) {
+            for (int r = 1; r < sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
                 String studentId = row.getCell(1).getStringCellValue();
@@ -99,7 +99,7 @@ public class ExcelServiceImpl implements ExcelService {
         int teacherConut = 0;
         Sheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
-            for (int r = 1; r < sheet.getLastRowNum(); r++) {
+            for (int r = 1; r <= sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
                 String classId = row.getCell(0).getStringCellValue();
@@ -138,7 +138,7 @@ public class ExcelServiceImpl implements ExcelService {
         int topicConut = 0;
         Sheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
-            for (int r = 1; r < sheet.getLastRowNum(); r++) {
+            for (int r = 1; r <= sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
                 String topicId = row.getCell(0).getStringCellValue();

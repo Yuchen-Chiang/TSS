@@ -7,10 +7,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,8 +40,8 @@ public class ExcelController {
      */
     @ResponseBody
     @RequestMapping(value = "/import/students", method = RequestMethod.POST)
-    public JSONObject importStudents(MultipartFile file) {
-        LOGGER.info("load students file {}", file.getName());
+    public JSONObject importStudents(@RequestParam("file") MultipartFile file) {
+        LOGGER.info("load students file {}", file.getOriginalFilename());
         return file.getSize() <= 0 ? Response.response(400) : excelService.importStudentsExcel(file.getOriginalFilename(), file);
     }
 
@@ -60,8 +57,8 @@ public class ExcelController {
      */
     @ResponseBody
     @RequestMapping(value = "/import/topics", method = RequestMethod.POST)
-    public JSONObject importTopics(MultipartFile file) {
-        LOGGER.info("load topics file {}", file.getName());
+    public JSONObject importTopics(@RequestParam("file") MultipartFile file) {
+        LOGGER.info("load topics file {}", file.getOriginalFilename());
         return file.getSize() <= 0 ? Response.response(400) : excelService.importTopicsExcel(file.getOriginalFilename(), file);
     }
 
@@ -77,8 +74,8 @@ public class ExcelController {
      */
     @ResponseBody
     @RequestMapping(value = "/import/teachers", method = RequestMethod.POST)
-    public JSONObject importTeachers(MultipartFile file) {
-        LOGGER.info("load teachers file {}", file.getName());
+    public JSONObject importTeachers(@RequestParam("file") MultipartFile file) {
+        LOGGER.info("load teachers file {}", file.getOriginalFilename());
         return file.getSize() <= 0 ? Response.response(400) : excelService.importTeachersExcel(file.getOriginalFilename(), file);
     }
 
