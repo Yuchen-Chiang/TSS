@@ -1,39 +1,52 @@
 package com.silver.tss.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.silver.tss.common.Response;
 import com.silver.tss.dao.StatusMapper;
+import com.silver.tss.domain.Status;
+import com.silver.tss.domain.StatusExample;
 import com.silver.tss.service.StatusService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("statusService")
 public class StatusServiceImpl implements StatusService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(StatusServiceImpl.class);
 
     @Resource
     private StatusMapper statusMapper;
 
     @Override
     public Boolean isStatus0() {
-        return null;
+        List<Status> statuses = getStatusList();
+        return statuses.size() > 0 && statuses.get(0).getTssStatus() == 0;
     }
 
     @Override
     public Boolean isStatus1() {
-        return null;
+        List<Status> statuses = getStatusList();
+        return statuses.size() > 0 && statuses.get(0).getTssStatus() == 1;
     }
 
     @Override
     public Boolean isStatus2() {
-        return null;
+        List<Status> statuses = getStatusList();
+        return statuses.size() > 0 && statuses.get(0).getTssStatus() == 2;
     }
 
     @Override
     public JSONObject updateStatus(int status) {
-        return null;
+        Status s = new Status();
+        s.setTssStatus(status);
+        StatusExample se = new StatusExample();
+        se.createCriteria().andIdEqualTo(1);
+        return statusMapper.updateByExampleSelective(s, se) > 0 ? Response.response(200) : Response.response(400);
+    }
+
+    private List<Status> getStatusList() {
+        StatusExample se = new StatusExample();
+        se.createCriteria().andIdEqualTo(1);
+        return statusMapper.selectByExample(se);
     }
 }
