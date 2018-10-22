@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JSONObject updateUserInfo(String studentId, String studentPwd) {
         User user = new User();
+        user.setStudentStatus(true);
         user.setStudentPwd(studentPwd);
         user.setModifyTime(new Date());
         UserExample ue = new UserExample();
