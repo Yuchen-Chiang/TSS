@@ -39,6 +39,8 @@ public class StatusController {
     @RequestMapping(value = "/change/status", method = RequestMethod.GET)
     public JSONObject changeStatus(int status) {
         LOGGER.info("change status={}", status);
-        return status == 0 || status == 1 || status == 2 ? statusService.updateStatus(status) : Response.response(400);
+        return status == 0 || status == 1 || status == 2 || status == 3
+                ? statusService.updateStatus(status)
+                : Response.response(400);
     }
 }
