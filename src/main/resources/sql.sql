@@ -52,7 +52,7 @@ create table topic(
 
 create table status(
   id int not null auto_increment,
-  tss_status int not null comment '0-change pwd; 1-start select; 2-end select',
+  tss_status int not null comment '3-debug status; 0-change pwd; 1-start select; 2-end select',
   modify_time datetime not null default current_timestamp,
   primary key(id)
 )engine=innodb default charset=utf8;

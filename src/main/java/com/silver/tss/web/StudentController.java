@@ -2,6 +2,7 @@ package com.silver.tss.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.silver.tss.common.Response;
+import com.silver.tss.service.StatusService;
 import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,9 @@ public class StudentController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StatusService statusService;
 
     /**
      * 学生账户登录
@@ -60,7 +64,8 @@ public class StudentController {
     @ResponseBody
     @RequestMapping(value = "/update/pwd", method = RequestMethod.GET)
     public JSONObject updatePwd(String studentId, String studentPwd) {
-        LOGGER.info("studentId={} change tss pwd={}", studentId, studentPwd);
+        LOGGER.info("studentId={} is trying to change tss pwd={}", studentId, studentPwd);
+        if (statusService.isStatus1() || statusService.isStatus2()) return Response.response(400);
         return userService.updateUserInfo(studentId, studentPwd);
     }
 

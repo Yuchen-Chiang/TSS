@@ -37,6 +37,12 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
+    public Boolean isStatus3() {
+        List<Status> statuses = getStatusList();
+        return statuses.size() > 0 && statuses.get(0).getTssStatus() == 3;
+    }
+
+    @Override
     public JSONObject updateStatus(int status) {
         Status s = new Status();
         s.setTssStatus(status);

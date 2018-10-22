@@ -10,5 +10,7 @@ public interface StatusService {
 
     Boolean isStatus2();
 
+    Boolean isStatus3();
+
     JSONObject updateStatus(int status);
 }

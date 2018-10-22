@@ -2,6 +2,7 @@ package com.silver.tss.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.silver.tss.common.Response;
+import com.silver.tss.service.StatusService;
 import com.silver.tss.service.TopicService;
 import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private StatusService statusService;
+
     /**
      * 学生选中题目
      * /topic/select/topic?studentId=xx&topicId=xx
@@ -37,14 +41,17 @@ public class TopicController {
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-学生已选过该题; 402-选题人数超上限
+     *     "code" : 200-成功; 400-失败; 401-学生已选过该题; 402-选题人数超上限; 403-不在选课时间范围内
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/select/topic", method = RequestMethod.GET)
     public JSONObject selectTopic(String studentId, String topicId) {
 
-        if (userService.isStudentUserHasTopic(studentId)) {
+        if (statusService.isStatus0() || statusService.isStatus2()) {
+            LOGGER.info("studentId={} select topicId={} failed, cause = 403", studentId, topicId);
+            return Response.response(403);
+        } else if (userService.isStudentUserHasTopic(studentId)) {
             LOGGER.info("studentId={} select topicId={} failed, cause code = 401", studentId, topicId);
             return Response.response(401);
         } else if (topicService.isRealGEtMaxSelect(topicId)) {
@@ -64,14 +71,17 @@ public class TopicController {
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-该学生未选择本题目
+     *     "code" : 200-成功; 400-失败; 401-该学生未选择本题目; 402-不在选课时间范围内
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/drop/topic", method = RequestMethod.GET)
     public JSONObject dropTopic(String studentId, String topicId) {
 
-        if (userService.isStudentUserHasTopic(studentId)) {
+        if (statusService.isStatus0() || statusService.isStatus2()) {
+            LOGGER.info("studentId={} drop topicId={} failed, cause = 402", studentId, topicId);
+            return Response.response(402);
+        } else if (userService.isStudentUserHasTopic(studentId)) {
             LOGGER.info("studentId={} drop topicId={} failed, cause code = 401", studentId, topicId);
             return Response.response(401);
         } else {
