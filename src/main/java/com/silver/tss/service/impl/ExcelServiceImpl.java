@@ -51,16 +51,12 @@ public class ExcelServiceImpl implements ExcelService {
         int userConut = 0;
         Sheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
-            LOGGER.info("一共{}行", sheet.getPhysicalNumberOfRows());
             for (int r = 3; r < sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
-                LOGGER.info("第{}行", r);
                 if (row == null) continue;
                 String tmp = String.valueOf(row.getCell(2).getNumericCellValue());
                 String classId = tmp.substring(0, tmp.lastIndexOf("."));
-                LOGGER.info("classId={}", classId);
                 String studentId = row.getCell(3).getStringCellValue();
-                LOGGER.info("studentId={}", studentId);
                 String studentName = row.getCell(4).getStringCellValue();
 
                 Student student = new Student();
