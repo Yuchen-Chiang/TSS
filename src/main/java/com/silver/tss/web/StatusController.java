@@ -29,7 +29,7 @@ public class StatusController {
      * 改变系统状态
      * /status/change/status?status=xx
      *
-     * @param status 0-change pwd; 1-start select; 2-end select
+     * @param status 0-change pwd; 1-start select; 2-end select; 3-debug status
      * @return
      * {
      *     "code" : 200-成功; 400-失败
