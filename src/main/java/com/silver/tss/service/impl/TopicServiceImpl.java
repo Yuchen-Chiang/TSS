@@ -11,6 +11,7 @@ import com.silver.tss.domain.TopicExample;
 import com.silver.tss.service.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,15 @@ public class TopicServiceImpl implements TopicService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TopicServiceImpl.class);
 
+    @Value("${tss.class-id.1}")
+    private String classId1;
+
+    @Value("${tss.class-id.2}")
+    private String classId2;
+
+    @Value("${tss.class-id.3}")
+    private String classId3;
+
     @Resource
     private TopicMapper topicMapper;
 
@@ -31,20 +41,28 @@ public class TopicServiceImpl implements TopicService {
     private StudentMapper studentMapper;
 
     @Override
-    public Boolean isRealGEtMaxSelect(String topicId) {
+    public Boolean isRealGEtMaxSelect(String topicId, String classId) {
         TopicExample te = new TopicExample();
         te.createCriteria()
                 .andTopicIdEqualTo(topicId)
                 .andYnEqualTo(true);
         List<Topic> topics = topicMapper.selectByExample(te);
-        return Optional.ofNullable(topics.get(0))
-                .map(t -> t.getTopicRealSelected() >= t.getTopicMaxSelected())
-                .orElse(false);
+        if (topics.size() > 0) {
+            Topic topic = topics.get(0);
+            if (classId1.equals(classId)) {
+                return topic.getTopicRealSelected1() >= topic.getTopicMaxSelected();
+            } else if (classId2.equals(classId)) {
+                return topic.getTopicRealSelected2() >= topic.getTopicMaxSelected();
+            } else if (classId3.equals(classId)) {
+                return topic.getTopicRealSelected3() >= topic.getTopicMaxSelected();
+            }
+        }
+        return false;
     }
 
     @Override
     @Transactional
-    public JSONObject doSelectTopic(String studentId, String topicId) {
+    public JSONObject doSelectTopic(String studentId, String topicId, String classId) {
         TopicExample te = new TopicExample();
         te.createCriteria()
                 .andTopicIdEqualTo(topicId)
@@ -55,7 +73,14 @@ public class TopicServiceImpl implements TopicService {
         else return Response.response(400);
 
         Topic t = new Topic();
-        t.setTopicRealSelected(topic.getTopicRealSelected() + 1);
+
+        if (classId1.equals(classId)) {
+            t.setTopicRealSelected1(topic.getTopicRealSelected1() + 1);
+        } else if (classId2.equals(classId)) {
+            t.setTopicRealSelected2(topic.getTopicRealSelected2() + 1);
+        } else if (classId3.equals(classId)) {
+            t.setTopicRealSelected3(topic.getTopicRealSelected3() + 1);
+        }
 
         Student s = new Student();
         s.setTopicId(topicId);
@@ -71,7 +96,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     @Transactional
-    public JSONObject undoSelectTopic(String studentId, String topicId) {
+    public JSONObject undoSelectTopic(String studentId, String topicId, String classId) {
         TopicExample te = new TopicExample();
         te.createCriteria()
                 .andTopicIdEqualTo(topicId)
@@ -82,7 +107,14 @@ public class TopicServiceImpl implements TopicService {
         else return Response.response(400);
 
         Topic t = new Topic();
-        t.setTopicRealSelected(topic.getTopicRealSelected() - 1);
+
+        if (classId1.equals(classId)) {
+            t.setTopicRealSelected1(topic.getTopicRealSelected1() - 1);
+        } else if (classId2.equals(classId)) {
+            t.setTopicRealSelected2(topic.getTopicRealSelected2() - 1);
+        } else if (classId3.equals(classId)) {
+            t.setTopicRealSelected3(topic.getTopicRealSelected3() - 1);
+        }
 
         Student s = new Student();
         s.setTopicId("null");
@@ -132,7 +164,7 @@ public class TopicServiceImpl implements TopicService {
             List<Topic> topics = topicMapper.selectByExample(te);
             if (topics.size() > 0) {
                 Topic topic = topics.get(0);
-                if (Integer.valueOf(data) < topic.getTopicRealSelected()) return Response.response(402);
+                if (Integer.valueOf(data) < Math.min(topic.getTopicRealSelected1(), Math.min(topic.getTopicRealSelected2(), topic.getTopicRealSelected3())) ) return Response.response(402);
                 else t.setTopicMaxSelected(Integer.valueOf(data));
             } else return Response.response(401);
         }
@@ -161,7 +193,7 @@ public class TopicServiceImpl implements TopicService {
                 .andYnEqualTo(true);
         List<Topic> topics = topicMapper.selectByExample(te);
         long count = 0;
-        for (Topic topic : topics) count += topic.getTopicRealSelected();
+        for (Topic topic : topics) count += (topic.getTopicRealSelected1() + topic.getTopicRealSelected2() + topic.getTopicRealSelected3());
         return Response.response(200, count);
     }
 
@@ -173,7 +205,7 @@ public class TopicServiceImpl implements TopicService {
                 .andYnEqualTo(true);
         List<Topic> topics = topicMapper.selectByExample(te);
         int count = 0;
-        for (Topic topic : topics) count += topic.getTopicRealSelected();
+        for (Topic topic : topics) count += (topic.getTopicRealSelected1() + topic.getTopicRealSelected2() + topic.getTopicRealSelected3());
         return Response.response(200, count);
     }
 }

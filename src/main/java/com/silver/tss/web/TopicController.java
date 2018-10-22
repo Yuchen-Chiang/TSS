@@ -35,7 +35,7 @@ public class TopicController {
 
     /**
      * 学生选中题目
-     * /topic/select/topic?studentId=xx&topicId=xx
+     * /topic/select/topic?studentId=xx&topicId=xx&classId=xx
      *
      * @param studentId 学号
      * @param topicId 题目ID
@@ -46,7 +46,7 @@ public class TopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/select/topic", method = RequestMethod.GET)
-    public JSONObject selectTopic(String studentId, String topicId) {
+    public JSONObject selectTopic(String studentId, String topicId, String classId) {
 
         if (statusService.isStatus0() || statusService.isStatus2()) {
             LOGGER.info("studentId={} select topicId={} failed, cause = 403", studentId, topicId);
@@ -54,18 +54,18 @@ public class TopicController {
         } else if (userService.isStudentUserHasTopic(studentId)) {
             LOGGER.info("studentId={} select topicId={} failed, cause code = 401", studentId, topicId);
             return Response.response(401);
-        } else if (topicService.isRealGEtMaxSelect(topicId)) {
-            LOGGER.info("studentId={} select topicId={} failed, cause code = 402", studentId, topicId);
+        } else if (topicService.isRealGEtMaxSelect(topicId, classId)) {
+            LOGGER.info("studentId={} select topicId={} in classId={} failed, cause code = 402", studentId, topicId, classId);
             return Response.response(402);
         } else {
             LOGGER.info("studentId={} select topicId={} success", studentId, topicId);
-            return topicService.doSelectTopic(studentId, topicId);
+            return topicService.doSelectTopic(studentId, topicId, classId);
         }
     }
 
     /**
      * 学生丢弃已选题目
-     * /topic/drop/topic?studentId=xx&topicId=xx
+     * /topic/drop/topic?studentId=xx&topicId=xx&&classId=xx
      *
      * @param studentId 学号
      * @param topicId 题目ID
@@ -76,7 +76,7 @@ public class TopicController {
      */
     @ResponseBody
     @RequestMapping(value = "/drop/topic", method = RequestMethod.GET)
-    public JSONObject dropTopic(String studentId, String topicId) {
+    public JSONObject dropTopic(String studentId, String topicId, String classId) {
 
         if (statusService.isStatus0() || statusService.isStatus2()) {
             LOGGER.info("studentId={} drop topicId={} failed, cause = 402", studentId, topicId);
@@ -86,7 +86,7 @@ public class TopicController {
             return Response.response(401);
         } else {
             LOGGER.info("studentId={} drop topicId={} success", studentId, topicId);
-            return topicService.undoSelectTopic(studentId, topicId);
+            return topicService.undoSelectTopic(studentId, topicId, classId);
         }
     }
 
@@ -143,7 +143,9 @@ public class TopicController {
      *              "topicType" : "xxx",
      *              "topicDescription" : "xxx",
      *              "topicMaxSelected" : "xxx",
-     *              "topicRealSelected" : "xxx",
+     *              "topicRealSelected1" : "xxx",
+     *              "topicRealSelected2" : "xxx",
+     *              "topicRealSelected3" : "xxx",
      *              "yn" : "true",
      *              "createTime" : "xxx",
      *              "modifiedTime" : "xxx"
