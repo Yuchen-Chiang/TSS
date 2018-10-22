@@ -51,12 +51,17 @@ public class ExcelServiceImpl implements ExcelService {
         int userConut = 0;
         Sheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
+            LOGGER.info("一共{}行", sheet.getPhysicalNumberOfRows());
             for (int r = 3; r < sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
+                LOGGER.info("第{}行", r);
                 if (row == null) continue;
-                String classId = row.getCell(3).getStringCellValue();
-                String studentId = row.getCell(4).getStringCellValue();
-                String studentName = row.getCell(5).getStringCellValue();
+                String tmp = String.valueOf(row.getCell(2).getNumericCellValue());
+                String classId = tmp.substring(0, tmp.lastIndexOf("."));
+                LOGGER.info("classId={}", classId);
+                String studentId = row.getCell(3).getStringCellValue();
+                LOGGER.info("studentId={}", studentId);
+                String studentName = row.getCell(4).getStringCellValue();
 
                 Student student = new Student();
                 student.setStudentId(studentId);
@@ -141,11 +146,13 @@ public class ExcelServiceImpl implements ExcelService {
             for (int r = 1; r <= sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
-                String topicId = row.getCell(0).getStringCellValue();
+                String tmp0 = String.valueOf(row.getCell(0).getNumericCellValue());
+                String topicId = tmp0.substring(0, tmp0.lastIndexOf("."));
                 String topicType = row.getCell(1).getStringCellValue();
                 String topicName = row.getCell(2).getStringCellValue();
                 String topicDescription = row.getCell(3).getStringCellValue();
-                String topicMaxSelected = row.getCell(4).getStringCellValue();
+                String tmp4 = String.valueOf(row.getCell(4).getNumericCellValue());
+                String topicMaxSelected = tmp4.substring(0, tmp4.lastIndexOf("."));
 
                 Topic topic = new Topic();
                 topic.setTopicId(topicId);
@@ -158,7 +165,7 @@ public class ExcelServiceImpl implements ExcelService {
                 topic.setTopicRealSelected3(0);
                 topic.setYn(true);
                 topic.setCreateTime(new Date());
-                topic.setCreateTime(new Date());
+                topic.setModifyTime(new Date());
 
                 topicConut += topicMapper.insert(topic);
             }
