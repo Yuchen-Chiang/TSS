@@ -44,7 +44,6 @@ public class ExcelServiceImpl implements ExcelService {
     @Override
     public JSONObject importStudentsExcel(String fileName, MultipartFile file) {
 
-        String classId = fileName.substring(0, fileName.lastIndexOf("."));
         Workbook wb = getReadWorkBook(fileName, file);
         if (wb == null) return Response.response(400);
 
@@ -52,11 +51,12 @@ public class ExcelServiceImpl implements ExcelService {
         int userConut = 0;
         Sheet sheet = wb.getSheetAt(0);
         if (sheet != null) {
-            for (int r = 1; r < sheet.getPhysicalNumberOfRows(); r++) {
+            for (int r = 3; r < sheet.getPhysicalNumberOfRows(); r++) {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
-                String studentId = row.getCell(1).getStringCellValue();
-                String studentName = row.getCell(2).getStringCellValue();
+                String classId = row.getCell(3).getStringCellValue();
+                String studentId = row.getCell(4).getStringCellValue();
+                String studentName = row.getCell(5).getStringCellValue();
 
                 Student student = new Student();
                 student.setStudentId(studentId);
@@ -142,8 +142,8 @@ public class ExcelServiceImpl implements ExcelService {
                 Row row = sheet.getRow(r);
                 if (row == null) continue;
                 String topicId = row.getCell(0).getStringCellValue();
-                String topicName = row.getCell(1).getStringCellValue();
-                String topicType = row.getCell(2).getStringCellValue();
+                String topicType = row.getCell(1).getStringCellValue();
+                String topicName = row.getCell(2).getStringCellValue();
                 String topicDescription = row.getCell(3).getStringCellValue();
                 String topicMaxSelected = row.getCell(4).getStringCellValue();
 
@@ -153,7 +153,9 @@ public class ExcelServiceImpl implements ExcelService {
                 topic.setTopicType(topicType);
                 topic.setTopicDescription(topicDescription);
                 topic.setTopicMaxSelected(Integer.valueOf(topicMaxSelected));
-                topic.setTopicRealSelected(0);
+                topic.setTopicRealSelected1(0);
+                topic.setTopicRealSelected2(0);
+                topic.setTopicRealSelected3(0);
                 topic.setYn(true);
                 topic.setCreateTime(new Date());
                 topic.setCreateTime(new Date());
