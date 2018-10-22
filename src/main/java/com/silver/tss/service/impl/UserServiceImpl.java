@@ -48,13 +48,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JSONObject isUserExist(String studentId, String studentPwd) {
+    public Boolean isUserExist(String studentId, String studentPwd) {
         UserExample ue = new UserExample();
         ue.createCriteria()
                 .andStudentIdEqualTo(studentId)
                 .andStudentPwdEqualTo(studentPwd)
                 .andYnEqualTo(true);
-        return userMapper.selectByExample(ue).size() > 0 ? Response.response(200) : Response.response(400);
+        return userMapper.selectByExample(ue).size() > 0;
+    }
+
+    @Override
+    public String queryStudentClassId(String studentId) {
+        StudentExample se = new StudentExample();
+        se.createCriteria()
+                .andStudentIdEqualTo(studentId)
+                .andYnEqualTo(true);
+        List<Student> students = studentMapper.selectByExample(se);
+        return students.size() > 0 ? students.get(0).getClassId() : null;
     }
 
     @Override

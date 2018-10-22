@@ -38,16 +38,20 @@ public class StudentController {
      * @return
      * {
      *     "code" : 200-成功; 300-需更新密码; 400-失败
+     *     "classId" : "xxx"
      * }
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public JSONObject login(String studentId, String studentPwd) {
         LOGGER.info("studentId={} with studentPwd={} login tss", studentId, studentPwd);
-        JSONObject response = userService.isUserExist(studentId, studentPwd);
-        return "200".equals(response.getString("code")) ?
-                userService.isUserChangePwd(studentId) ? response : Response.response(300)
-                : Response.response(400);
+        if (userService.isUserExist(studentId, studentPwd)) {
+            if (userService.isUserChangePwd(studentId)) {
+                String classId = userService.queryStudentClassId(studentId);
+                if (classId != null) return Response.loginSuccess(200, classId);
+                else return Response.response(400);
+            } else return Response.response(300);
+        } else return Response.response(400);
     }
 
     /**

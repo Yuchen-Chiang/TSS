@@ -8,7 +8,9 @@ public interface UserService {
 
     Boolean isStudentUserHasTopic(String studentId);
 
-    JSONObject isUserExist(String studentId, String studentPwd);
+    Boolean isUserExist(String studentId, String studentPwd);
+
+    String queryStudentClassId(String studentId);
 
     JSONObject queryStudentUserList(String classId);
 
