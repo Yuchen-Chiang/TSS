@@ -41,7 +41,7 @@ public class TopicController {
      * @param topicId 题目ID
      * @return
      * {
-     *     "code" : 200-成功; 400-失败; 401-学生已选过该题; 402-选题人数超上限; 403-不在选课时间范围内
+     *     "code" : 200-成功; 400-失败; 401-学生已选过题; 402-选题人数超上限; 403-不在选课时间范围内
      * }
      */
     @ResponseBody
