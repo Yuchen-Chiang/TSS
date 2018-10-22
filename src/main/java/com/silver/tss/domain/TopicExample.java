@@ -505,63 +505,183 @@ public class TopicExample {
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedIsNull() {
-            addCriterion("topic_real_selected is null");
+        public Criteria andTopicRealSelected1IsNull() {
+            addCriterion("topic_real_selected_1 is null");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedIsNotNull() {
-            addCriterion("topic_real_selected is not null");
+        public Criteria andTopicRealSelected1IsNotNull() {
+            addCriterion("topic_real_selected_1 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedEqualTo(Integer value) {
-            addCriterion("topic_real_selected =", value, "topicRealSelected");
+        public Criteria andTopicRealSelected1EqualTo(Integer value) {
+            addCriterion("topic_real_selected_1 =", value, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedNotEqualTo(Integer value) {
-            addCriterion("topic_real_selected <>", value, "topicRealSelected");
+        public Criteria andTopicRealSelected1NotEqualTo(Integer value) {
+            addCriterion("topic_real_selected_1 <>", value, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedGreaterThan(Integer value) {
-            addCriterion("topic_real_selected >", value, "topicRealSelected");
+        public Criteria andTopicRealSelected1GreaterThan(Integer value) {
+            addCriterion("topic_real_selected_1 >", value, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedGreaterThanOrEqualTo(Integer value) {
-            addCriterion("topic_real_selected >=", value, "topicRealSelected");
+        public Criteria andTopicRealSelected1GreaterThanOrEqualTo(Integer value) {
+            addCriterion("topic_real_selected_1 >=", value, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedLessThan(Integer value) {
-            addCriterion("topic_real_selected <", value, "topicRealSelected");
+        public Criteria andTopicRealSelected1LessThan(Integer value) {
+            addCriterion("topic_real_selected_1 <", value, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedLessThanOrEqualTo(Integer value) {
-            addCriterion("topic_real_selected <=", value, "topicRealSelected");
+        public Criteria andTopicRealSelected1LessThanOrEqualTo(Integer value) {
+            addCriterion("topic_real_selected_1 <=", value, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedIn(List<Integer> values) {
-            addCriterion("topic_real_selected in", values, "topicRealSelected");
+        public Criteria andTopicRealSelected1In(List<Integer> values) {
+            addCriterion("topic_real_selected_1 in", values, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedNotIn(List<Integer> values) {
-            addCriterion("topic_real_selected not in", values, "topicRealSelected");
+        public Criteria andTopicRealSelected1NotIn(List<Integer> values) {
+            addCriterion("topic_real_selected_1 not in", values, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedBetween(Integer value1, Integer value2) {
-            addCriterion("topic_real_selected between", value1, value2, "topicRealSelected");
+        public Criteria andTopicRealSelected1Between(Integer value1, Integer value2) {
+            addCriterion("topic_real_selected_1 between", value1, value2, "topicRealSelected1");
             return (Criteria) this;
         }
 
-        public Criteria andTopicRealSelectedNotBetween(Integer value1, Integer value2) {
-            addCriterion("topic_real_selected not between", value1, value2, "topicRealSelected");
+        public Criteria andTopicRealSelected1NotBetween(Integer value1, Integer value2) {
+            addCriterion("topic_real_selected_1 not between", value1, value2, "topicRealSelected1");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2IsNull() {
+            addCriterion("topic_real_selected_2 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2IsNotNull() {
+            addCriterion("topic_real_selected_2 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2EqualTo(Integer value) {
+            addCriterion("topic_real_selected_2 =", value, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2NotEqualTo(Integer value) {
+            addCriterion("topic_real_selected_2 <>", value, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2GreaterThan(Integer value) {
+            addCriterion("topic_real_selected_2 >", value, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2GreaterThanOrEqualTo(Integer value) {
+            addCriterion("topic_real_selected_2 >=", value, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2LessThan(Integer value) {
+            addCriterion("topic_real_selected_2 <", value, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2LessThanOrEqualTo(Integer value) {
+            addCriterion("topic_real_selected_2 <=", value, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2In(List<Integer> values) {
+            addCriterion("topic_real_selected_2 in", values, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2NotIn(List<Integer> values) {
+            addCriterion("topic_real_selected_2 not in", values, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2Between(Integer value1, Integer value2) {
+            addCriterion("topic_real_selected_2 between", value1, value2, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected2NotBetween(Integer value1, Integer value2) {
+            addCriterion("topic_real_selected_2 not between", value1, value2, "topicRealSelected2");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3IsNull() {
+            addCriterion("topic_real_selected_3 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3IsNotNull() {
+            addCriterion("topic_real_selected_3 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3EqualTo(Integer value) {
+            addCriterion("topic_real_selected_3 =", value, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3NotEqualTo(Integer value) {
+            addCriterion("topic_real_selected_3 <>", value, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3GreaterThan(Integer value) {
+            addCriterion("topic_real_selected_3 >", value, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3GreaterThanOrEqualTo(Integer value) {
+            addCriterion("topic_real_selected_3 >=", value, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3LessThan(Integer value) {
+            addCriterion("topic_real_selected_3 <", value, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3LessThanOrEqualTo(Integer value) {
+            addCriterion("topic_real_selected_3 <=", value, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3In(List<Integer> values) {
+            addCriterion("topic_real_selected_3 in", values, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3NotIn(List<Integer> values) {
+            addCriterion("topic_real_selected_3 not in", values, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3Between(Integer value1, Integer value2) {
+            addCriterion("topic_real_selected_3 between", value1, value2, "topicRealSelected3");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicRealSelected3NotBetween(Integer value1, Integer value2) {
+            addCriterion("topic_real_selected_3 not between", value1, value2, "topicRealSelected3");
             return (Criteria) this;
         }
 

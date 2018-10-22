@@ -8,7 +8,9 @@
     <result column="topic_type" jdbcType="VARCHAR" property="topicType" />
     <result column="topic_description" jdbcType="VARCHAR" property="topicDescription" />
     <result column="topic_max_selected" jdbcType="INTEGER" property="topicMaxSelected" />
-    <result column="topic_real_selected" jdbcType="INTEGER" property="topicRealSelected" />
+    <result column="topic_real_selected_1" jdbcType="INTEGER" property="topicRealSelected1" />
+    <result column="topic_real_selected_2" jdbcType="INTEGER" property="topicRealSelected2" />
+    <result column="topic_real_selected_3" jdbcType="INTEGER" property="topicRealSelected3" />
     <result column="yn" jdbcType="BIT" property="yn" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
@@ -72,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, topic_id, topic_name, topic_type, topic_description, topic_max_selected, topic_real_selected, 
-    yn, create_time, modify_time
+    id, topic_id, topic_name, topic_type, topic_description, topic_max_selected, topic_real_selected_1,
+    topic_real_selected_2, topic_real_selected_3, yn, create_time, modify_time
   </sql>
   <select id="selectByExample" parameterType="com.silver.tss.domain.TopicExample" resultMap="BaseResultMap">
     select
@@ -96,13 +98,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.silver.tss.domain.Topic">
-    insert into topic (id, topic_id, topic_name, 
-      topic_type, topic_description, topic_max_selected, 
-      topic_real_selected, yn, create_time, 
+    insert into topic (id, topic_id, topic_name,
+      topic_type, topic_description, topic_max_selected,
+      topic_real_selected_1, topic_real_selected_2,
+      topic_real_selected_3, yn, create_time,
       modify_time)
-    values (#{id,jdbcType=INTEGER}, #{topicId,jdbcType=VARCHAR}, #{topicName,jdbcType=VARCHAR}, 
-      #{topicType,jdbcType=VARCHAR}, #{topicDescription,jdbcType=VARCHAR}, #{topicMaxSelected,jdbcType=INTEGER}, 
-      #{topicRealSelected,jdbcType=INTEGER}, #{yn,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{topicId,jdbcType=VARCHAR}, #{topicName,jdbcType=VARCHAR},
+      #{topicType,jdbcType=VARCHAR}, #{topicDescription,jdbcType=VARCHAR}, #{topicMaxSelected,jdbcType=INTEGER},
+      #{topicRealSelected1,jdbcType=INTEGER}, #{topicRealSelected2,jdbcType=INTEGER},
+      #{topicRealSelected3,jdbcType=INTEGER}, #{yn,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
       #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.silver.tss.domain.Topic">
@@ -126,8 +130,14 @@
       <if test="topicMaxSelected != null">
         topic_max_selected,
       </if>
-      <if test="topicRealSelected != null">
-        topic_real_selected,
+      <if test="topicRealSelected1 != null">
+        topic_real_selected_1,
+      </if>
+      <if test="topicRealSelected2 != null">
+        topic_real_selected_2,
+      </if>
+      <if test="topicRealSelected3 != null">
+        topic_real_selected_3,
       </if>
       <if test="yn != null">
         yn,
@@ -158,8 +168,14 @@
       <if test="topicMaxSelected != null">
         #{topicMaxSelected,jdbcType=INTEGER},
       </if>
-      <if test="topicRealSelected != null">
-        #{topicRealSelected,jdbcType=INTEGER},
+      <if test="topicRealSelected1 != null">
+        #{topicRealSelected1,jdbcType=INTEGER},
+      </if>
+      <if test="topicRealSelected2 != null">
+        #{topicRealSelected2,jdbcType=INTEGER},
+      </if>
+      <if test="topicRealSelected3 != null">
+        #{topicRealSelected3,jdbcType=INTEGER},
       </if>
       <if test="yn != null">
         #{yn,jdbcType=BIT},
@@ -199,8 +215,14 @@
       <if test="record.topicMaxSelected != null">
         topic_max_selected = #{record.topicMaxSelected,jdbcType=INTEGER},
       </if>
-      <if test="record.topicRealSelected != null">
-        topic_real_selected = #{record.topicRealSelected,jdbcType=INTEGER},
+      <if test="record.topicRealSelected1 != null">
+        topic_real_selected_1 = #{record.topicRealSelected1,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicRealSelected2 != null">
+        topic_real_selected_2 = #{record.topicRealSelected2,jdbcType=INTEGER},
+      </if>
+      <if test="record.topicRealSelected3 != null">
+        topic_real_selected_3 = #{record.topicRealSelected3,jdbcType=INTEGER},
       </if>
       <if test="record.yn != null">
         yn = #{record.yn,jdbcType=BIT},
@@ -219,15 +241,17 @@
   <update id="updateByExample" parameterType="map">
     update topic
     set id = #{record.id,jdbcType=INTEGER},
-      topic_id = #{record.topicId,jdbcType=VARCHAR},
-      topic_name = #{record.topicName,jdbcType=VARCHAR},
-      topic_type = #{record.topicType,jdbcType=VARCHAR},
-      topic_description = #{record.topicDescription,jdbcType=VARCHAR},
-      topic_max_selected = #{record.topicMaxSelected,jdbcType=INTEGER},
-      topic_real_selected = #{record.topicRealSelected,jdbcType=INTEGER},
-      yn = #{record.yn,jdbcType=BIT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    topic_id = #{record.topicId,jdbcType=VARCHAR},
+    topic_name = #{record.topicName,jdbcType=VARCHAR},
+    topic_type = #{record.topicType,jdbcType=VARCHAR},
+    topic_description = #{record.topicDescription,jdbcType=VARCHAR},
+    topic_max_selected = #{record.topicMaxSelected,jdbcType=INTEGER},
+    topic_real_selected_1 = #{record.topicRealSelected1,jdbcType=INTEGER},
+    topic_real_selected_2 = #{record.topicRealSelected2,jdbcType=INTEGER},
+    topic_real_selected_3 = #{record.topicRealSelected3,jdbcType=INTEGER},
+    yn = #{record.yn,jdbcType=BIT},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

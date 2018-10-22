@@ -15,7 +15,11 @@ public class Topic {
 
     private Integer topicMaxSelected;
 
-    private Integer topicRealSelected;
+    private Integer topicRealSelected1;
+
+    private Integer topicRealSelected2;
+
+    private Integer topicRealSelected3;
 
     private Boolean yn;
 
@@ -71,12 +75,28 @@ public class Topic {
         this.topicMaxSelected = topicMaxSelected;
     }
 
-    public Integer getTopicRealSelected() {
-        return topicRealSelected;
+    public Integer getTopicRealSelected1() {
+        return topicRealSelected1;
     }
 
-    public void setTopicRealSelected(Integer topicRealSelected) {
-        this.topicRealSelected = topicRealSelected;
+    public void setTopicRealSelected1(Integer topicRealSelected1) {
+        this.topicRealSelected1 = topicRealSelected1;
+    }
+
+    public Integer getTopicRealSelected2() {
+        return topicRealSelected2;
+    }
+
+    public void setTopicRealSelected2(Integer topicRealSelected2) {
+        this.topicRealSelected2 = topicRealSelected2;
+    }
+
+    public Integer getTopicRealSelected3() {
+        return topicRealSelected3;
+    }
+
+    public void setTopicRealSelected3(Integer topicRealSelected3) {
+        this.topicRealSelected3 = topicRealSelected3;
     }
 
     public Boolean getYn() {
