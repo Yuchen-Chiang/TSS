@@ -58,13 +58,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String queryStudentClassId(String studentId) {
+    public Student queryStudentInfo(String studentId) {
         StudentExample se = new StudentExample();
         se.createCriteria()
                 .andStudentIdEqualTo(studentId)
                 .andYnEqualTo(true);
         List<Student> students = studentMapper.selectByExample(se);
-        return students.size() > 0 ? students.get(0).getClassId() : null;
+        return students.size() > 0 ? students.get(0) : null;
     }
 
     @Override

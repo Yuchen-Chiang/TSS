@@ -2,6 +2,7 @@ package com.silver.tss.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.silver.tss.common.Response;
+import com.silver.tss.domain.Student;
 import com.silver.tss.service.StatusService;
 import com.silver.tss.service.UserService;
 import org.slf4j.Logger;
@@ -39,7 +40,10 @@ public class StudentController {
      * {
      *     "code" : 200-成功; 300-需更新密码; 400-失败
      *     "classId" : "xxx"
+     *     "studentName" : "xxx"
+     *     "topicName" : "xxx"
      * }
+     * 若返回的topicName = 字符串型的"null"表示未选课
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -47,8 +51,13 @@ public class StudentController {
         LOGGER.info("studentId={} with studentPwd={} login tss", studentId, studentPwd);
         if (userService.isUserExist(studentId, studentPwd)) {
             if (userService.isUserChangePwd(studentId)) {
-                String classId = userService.queryStudentClassId(studentId);
-                if (classId != null) return Response.loginSuccess(200, classId);
+                Student student = userService.queryStudentInfo(studentId);
+                if (student != null) return Response.loginSuccess(
+                        200,
+                        student.getClassId(),
+                        student.getStudentName(),
+                        student.getTopicName()
+                );
                 else return Response.response(400);
             } else return Response.response(300);
         } else return Response.response(400);

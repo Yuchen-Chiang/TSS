@@ -1,6 +1,7 @@
 package com.silver.tss.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.silver.tss.domain.Student;
 
 public interface UserService {
 
@@ -10,7 +11,7 @@ public interface UserService {
 
     Boolean isUserExist(String studentId, String studentPwd);
 
-    String queryStudentClassId(String studentId);
+    Student queryStudentInfo(String studentId);
 
     JSONObject queryStudentUserList(String classId);
 
