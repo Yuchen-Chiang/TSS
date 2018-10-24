@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
             return Boolean.FALSE;
         }
         return Optional.ofNullable(students.get(0))
-            .map(s -> !"null".equals(s.getTopicId()))
+            .map(s -> "null".equals(s.getTopicId()))
             .orElse(false);
     }
 
