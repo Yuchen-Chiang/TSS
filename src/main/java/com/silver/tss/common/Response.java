@@ -17,12 +17,13 @@ public class Response {
         return response;
     }
 
-    public static JSONObject loginSuccess(int code, String classId, String studentName, String topicName) {
+    public static JSONObject loginSuccess(int code, String classId, String studentName, String topicName, String topicId) {
         JSONObject response = new JSONObject();
         response.put("code", code);
         response.put("classId", classId);
         response.put("studentName", studentName);
         response.put("topicName", topicName);
+        response.put("topicId", topicId);
         return response;
     }
 }

@@ -15,7 +15,7 @@ public interface UserService {
 
     JSONObject queryStudentUserList(String classId);
 
-    JSONObject updateUserInfo(String studentId, String studentPwd);
+    Boolean updateUserInfo(String studentId, String studentPwd);
 
     JSONObject countSelectedByClass(String classId);
 

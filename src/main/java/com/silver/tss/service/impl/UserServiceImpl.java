@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public JSONObject updateUserInfo(String studentId, String studentPwd) {
+    public Boolean updateUserInfo(String studentId, String studentPwd) {
         User user = new User();
         user.setStudentStatus(true);
         user.setStudentPwd(studentPwd);
@@ -94,8 +94,7 @@ public class UserServiceImpl implements UserService {
         ue.createCriteria()
             .andStudentIdEqualTo(studentId)
             .andYnEqualTo(true);
-        return userMapper.updateByExampleSelective(user, ue) > 0 ? Response.response(200)
-            : Response.response(400);
+        return userMapper.updateByExampleSelective(user, ue) > 0;
     }
 
     @Override

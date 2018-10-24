@@ -42,8 +42,10 @@ public class StudentController {
      *     "classId" : "xxx"
      *     "studentName" : "xxx"
      *     "topicName" : "xxx"
+     *     "topicId" : "xxx"
      * }
      * 若返回的topicName = 字符串型的"null"表示未选课
+     * 若返回的topicId = 字符串型的"null"表示未选课
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -56,7 +58,8 @@ public class StudentController {
                         200,
                         student.getClassId(),
                         student.getStudentName(),
-                        student.getTopicName()
+                        student.getTopicName(),
+                        student.getTopicId()
                 );
                 else return Response.response(400);
             } else return Response.response(300);
@@ -72,6 +75,10 @@ public class StudentController {
      * @return
      * {
      *     "code" : 200-成功; 400-失败
+     *     "classId" : "xxx"
+     *     "studentName" : "xxx"
+     *     "topicName" : "xxx"
+     *     "topicId" : "xxx"
      * }
      */
     @ResponseBody
@@ -79,7 +86,17 @@ public class StudentController {
     public JSONObject updatePwd(String studentId, String studentPwd) {
         LOGGER.info("studentId={} is trying to change tss pwd={}", studentId, studentPwd);
         if (statusService.isStatus1() || statusService.isStatus2()) return Response.response(400);
-        return userService.updateUserInfo(studentId, studentPwd);
+        if (userService.updateUserInfo(studentId, studentPwd)) {
+            Student student = userService.queryStudentInfo(studentId);
+            if (student != null) return Response.loginSuccess(
+                    200,
+                    student.getClassId(),
+                    student.getStudentName(),
+                    student.getTopicName(),
+                    student.getTopicId()
+            );
+        }
+        return Response.response(400);
     }
 
     /**
