@@ -108,7 +108,7 @@ public class TopicController {
         if (statusService.isStatus0() || statusService.isStatus2()) {
             LOGGER.info("studentId={} drop topicId={} failed, cause = 402", studentId, topicId);
             return Response.response(402);
-        } else if (userService.isStudentUserHasTopic(studentId)) {
+        } else if (!userService.isStudentUserHasTopic(studentId)) {
             LOGGER.info("studentId={} drop topicId={} failed, cause code = 401", studentId, topicId);
             return Response.response(401);
         } else {
