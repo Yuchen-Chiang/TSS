@@ -3,9 +3,7 @@
 > @date 2018-10-20 
  
 > 学生管理接口，见src/main/java/com/silver/tss/web/StudentController  
-> 统计接口，见src/main/java/com/silver/tss/web/StatisticsController  
 > 题目管理接口，见src/main/java/com/silver/tss/web/TopicsController   
-> EXCEL导入导出接口，见src/main/java/com/silver/tss/web/ExcelController
 
 ## 配置排坑
 > Tomcat8 采用apt安装的方式安装  
