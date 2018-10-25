@@ -117,53 +117,53 @@ public class TopicController {
         }
     }
 
-    /**
-     * 删除题目
-     * /topic/delete/topic?topicId=xx
-     *
-     * @param topicId 题目ID
-     * @return { "code" : 200-成功; 400-失败 }
-     */
-    @ApiOperation(value = "删除题目", notes = "根据提交参数进行删除题目操作\n" +
-        "返回：{ \"code\" : 200-成功; 400-失败 }")
-    @ResponseBody
-    @RequestMapping(value = "/delete/topic", method = RequestMethod.GET)
-    public JSONObject deleteTopic(
-        @ApiParam(required = true, name = "topicId", value = "题号")
-        @RequestParam(required = true)
-            String topicId
-    ) {
-        LOGGER.info("topicId={} is deleted", topicId);
-        return topicService.deleteTopic(topicId);
-    }
-
-    /**
-     * 更新题目
-     * /topic/update/topic?topicId=xx&data=xx&type=xx
-     *
-     * @param topicId 题目ID
-     * @param data 待更新数据
-     * @param type 更新类型, 0-题目名称; 1-题目描述; 2-题目人数上限
-     * @return { "code" : 200-成功; 400-失败; 401-参数错误; 402-题目人数上限小于实际选题人数 }
-     */
-    @ApiOperation(value = "更新题目", notes = "根据提交参数进行更新题目操作\n" +
-        "返回：{ \"code\" : 200-成功; 400-失败; 401-参数错误; 402-题目人数上限小于实际选题人数 }")
-    @ResponseBody
-    @RequestMapping(value = "/update/topic", method = RequestMethod.GET)
-    public JSONObject updateTopic(
-        @ApiParam(required = true, name = "topicId", value = "题号")
-        @RequestParam(required = true)
-            String topicId,
-
-        @ApiParam(required = true, name = "data", value = "待更新数据")
-        @RequestParam(required = true)
-            String data,
-
-        @ApiParam(required = true, name = "type", value = "更新类型, 0-题目名称; 1-题目描述; 2-题目人数上限")
-        @RequestParam(required = true)
-            String type) {
-        return topicService.updateTopic(topicId, data, Integer.parseInt(type));
-    }
+//    /**
+//     * 删除题目
+//     * /topic/delete/topic?topicId=xx
+//     *
+//     * @param topicId 题目ID
+//     * @return { "code" : 200-成功; 400-失败 }
+//     */
+//    @ApiOperation(value = "删除题目", notes = "根据提交参数进行删除题目操作\n" +
+//        "返回：{ \"code\" : 200-成功; 400-失败 }")
+//    @ResponseBody
+//    @RequestMapping(value = "/delete/topic", method = RequestMethod.GET)
+//    public JSONObject deleteTopic(
+//        @ApiParam(required = true, name = "topicId", value = "题号")
+//        @RequestParam(required = true)
+//            String topicId
+//    ) {
+//        LOGGER.info("topicId={} is deleted", topicId);
+//        return topicService.deleteTopic(topicId);
+//    }
+//
+//    /**
+//     * 更新题目
+//     * /topic/update/topic?topicId=xx&data=xx&type=xx
+//     *
+//     * @param topicId 题目ID
+//     * @param data 待更新数据
+//     * @param type 更新类型, 0-题目名称; 1-题目描述; 2-题目人数上限
+//     * @return { "code" : 200-成功; 400-失败; 401-参数错误; 402-题目人数上限小于实际选题人数 }
+//     */
+//    @ApiOperation(value = "更新题目", notes = "根据提交参数进行更新题目操作\n" +
+//        "返回：{ \"code\" : 200-成功; 400-失败; 401-参数错误; 402-题目人数上限小于实际选题人数 }")
+//    @ResponseBody
+//    @RequestMapping(value = "/update/topic", method = RequestMethod.GET)
+//    public JSONObject updateTopic(
+//        @ApiParam(required = true, name = "topicId", value = "题号")
+//        @RequestParam(required = true)
+//            String topicId,
+//
+//        @ApiParam(required = true, name = "data", value = "待更新数据")
+//        @RequestParam(required = true)
+//            String data,
+//
+//        @ApiParam(required = true, name = "type", value = "更新类型, 0-题目名称; 1-题目描述; 2-题目人数上限")
+//        @RequestParam(required = true)
+//            String type) {
+//        return topicService.updateTopic(topicId, data, Integer.parseInt(type));
+//    }
 
 
     /**
